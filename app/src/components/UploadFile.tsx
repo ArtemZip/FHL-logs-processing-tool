@@ -53,7 +53,7 @@ export class UploadFileComponent extends Component<UploadFileProps, UploadFileSt
                     <input accept=".txt" style={inputUploadFile} id="file" multiple={true} type="file"
                         onChange={this.handleFileChange.bind(this)} />
                     <label htmlFor="file">
-                        Upload files
+                        Click to upload
                     </label>
                 </header>
             </div>
