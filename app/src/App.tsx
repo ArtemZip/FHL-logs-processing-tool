@@ -1,5 +1,5 @@
 import './App.css';
-import { UploadFileComponent } from "./UploadFile";
+import { UploadFileComponent } from "./components/UploadFile";
 
 function App() {
   return (
@@ -12,3 +12,4 @@ function App() {
 }
 
 export default App;
+
