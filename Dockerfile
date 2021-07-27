@@ -5,7 +5,11 @@ USER root
 #TOOLS INSTALATION
 RUN apt-get update \
   && apt-get install -y curl \
-  && apt-get install unzip
+  && apt-get install unzip \
+  && apt-get install -f --yes nodejs \
+  && apt-get install -f --yes npm
+
+RUN npm install -g serve
 
 #LOKI
 RUN mkdir -p /opt/fhl/loki \
@@ -18,6 +22,10 @@ RUN mkdir -p /opt/fhl/loki \
 RUN cd /opt/fhl \
     && curl -O -L "https://dl.grafana.com/oss/release/grafana-8.0.6.linux-amd64.tar.gz" \
     && tar -xvf grafana-8.0.6.linux-amd64.tar.gz
+
+#OUR LOG APP
+RUN cd /opt/fhl && mkdir log-app
+COPY ./app/build /opt/fhl/log-app
 
 #COPYING CONFIGS & SCRIPTS
 COPY ./.bin/loki.yaml /opt/fhl/loki/loki.yaml
