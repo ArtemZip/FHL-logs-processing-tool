@@ -20,8 +20,8 @@ RUN cd /opt/fhl \
     && tar -xvf grafana-8.0.6.linux-amd64.tar.gz
 
 #COPYING CONFIGS & SCRIPTS
-COPY ./bin/loki.yaml /opt/fhl/loki/loki.yaml
-COPY ./bin/run.sh /opt/fhl/run.sh
+COPY ./.bin/loki.yaml /opt/fhl/loki/loki.yaml
+COPY ./.bin/run.sh /opt/fhl/run.sh
 RUN chmod 777 /opt/fhl/run.sh
 
 EXPOSE 3000 3100 9093 9096
