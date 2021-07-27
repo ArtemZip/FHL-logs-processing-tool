@@ -22,6 +22,7 @@ RUN cd /opt/fhl \
 #COPYING CONFIGS & SCRIPTS
 COPY ./.bin/loki.yaml /opt/fhl/loki/loki.yaml
 COPY ./.bin/grafana-datasource.yaml /opt/fhl/grafana-8.0.6/conf/provisioning/datasources/datasource.yml
+COPY ./.bin/grafana-config.ini /opt/fhl/grafana-8.0.6/conf/custom.ini
 COPY ./.bin/run.sh /opt/fhl/run.sh
 RUN chmod 777 /opt/fhl/run.sh
 
