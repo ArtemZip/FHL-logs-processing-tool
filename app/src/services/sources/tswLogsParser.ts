@@ -1,7 +1,7 @@
 import type { ILogsParser, ParsedLine, ParsingResult } from '../../types/logsParserInterfaces';
 
 export class TswLogsParser implements ILogsParser {
-    public Parse(lines: string[]): ParsingResult {
+    public parse(lines: string[]): ParsingResult {
         let parsedLines: ParsedLine[] = [];
         lines.forEach(line => {
             let dateTime = line.match(/^.*Time\)/)?.[0] ?? '';

@@ -1,19 +1,23 @@
-import { ILogsParser, ILogsParserService } from "../types/logsParserInterfaces";
+import { ILogsClient, ILogsParser, ILogsParserService } from "../types/logsParserInterfaces";
 import { initLogsParser } from "./logsParserResolver";
+import { getLogsClient } from "./lokiClient";
 
 export class LogsParserService implements ILogsParserService {
     private logsParser: ILogsParser;
+    private logsClient: ILogsClient;
     private chunksSize: number = 10;
 
     public constructor() {
         this.logsParser = initLogsParser();
+        this.logsClient = getLogsClient();
     }
 
-    public Upload(content: string): void {
+    public async upload(content: string): Promise<void> {
         const lines = this.splitFileContent(content);
         // todo: think about parsing whole content or split into chunks
-        const parsedContent = this.logsParser.Parse(lines);
-        // todo: push to Loki
+        const result = this.logsParser.parse(lines);
+        // todo: split
+        await this.logsClient.push(result.parsedContent.slice(0, this.chunksSize));
     }
 
     private splitFileContent(content: string): string[] {
