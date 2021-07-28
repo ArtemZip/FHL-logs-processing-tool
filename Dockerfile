@@ -23,7 +23,7 @@ RUN cd /opt/fhl \
     && curl -O -L "https://dl.grafana.com/oss/release/grafana-8.0.6.linux-amd64.tar.gz" \
     && tar -xvf grafana-8.0.6.linux-amd64.tar.gz
 
-#OUR LOG APP
+# OUR LOG APP
 RUN cd /opt/fhl && mkdir log-app
 COPY ./app/build /opt/fhl/log-app
 
@@ -34,5 +34,5 @@ COPY ./.bin/grafana-config.ini /opt/fhl/grafana-8.0.6/conf/custom.ini
 COPY ./.bin/run.sh /opt/fhl/run.sh
 RUN chmod 777 /opt/fhl/run.sh
 
-EXPOSE 3000 3100 9093 9096
+EXPOSE 3000 3100 8080 9093 9096
 ENTRYPOINT [ "/opt/fhl/run.sh"]
