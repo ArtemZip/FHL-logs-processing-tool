@@ -1,4 +1,5 @@
 import { ChangeEvent, Component, CSSProperties } from "react";
+import { getLogsParserService } from "../services/logsService";
 
 const inputUploadFile: CSSProperties = {
   display: 'none',
@@ -23,6 +24,8 @@ export class UploadFileComponent extends Component<UploadFileProps, UploadFileSt
     }
 
     private manageUploadedFile(binary: String, file: File) {
+        const logsService = getLogsParserService();
+        logsService.Upload(binary.toString());
         // todo: display upload result and file info if necessary
         console.log(`File size: ${binary.length}`);
         console.log(`File name: ${file.name}`);

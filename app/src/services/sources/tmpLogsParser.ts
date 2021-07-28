@@ -1,7 +1,7 @@
-import type { ILogsParser } from '../../types/logsParserInterfaces';
+import type { ILogsParser, ParsingResult } from '../../types/logsParserInterfaces';
 
 export class TmpLogsParser implements ILogsParser {
-    public Parse(lines: string[]): string {
+    public Parse(lines: string[]): ParsingResult {
         throw new Error('Method not implemented.');
     }
 }

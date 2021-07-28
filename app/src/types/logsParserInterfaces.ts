@@ -1,5 +1,5 @@
 export interface ILogsParserService {
-    Parse(content: string): void;
+    Upload(content: string): void;
 }
 
 export interface ILogsParser {
@@ -7,4 +7,9 @@ export interface ILogsParser {
 }
 
 export type ParsingResult = {
+    parsedContent: ParsedLine[]
+}
+
+export type ParsedLine = {
+    columns: string[]
 }
