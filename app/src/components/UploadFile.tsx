@@ -25,7 +25,7 @@ export class UploadFileComponent extends Component<UploadFileProps, UploadFileSt
 
     private manageUploadedFile(binary: String, file: File) {
         const logsService = getLogsParserService();
-        logsService.Upload(binary.toString());
+        logsService.upload(binary.toString());
         // todo: display upload result and file info if necessary
         console.log(`File size: ${binary.length}`);
         console.log(`File name: ${file.name}`);

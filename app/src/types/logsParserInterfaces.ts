@@ -1,10 +1,14 @@
 export interface ILogsParserService {
-    Upload(content: string): void;
+    upload(content: string): Promise<void>;
 }
 
 export interface ILogsParser {
-    Parse(lines: string[]): ParsingResult;
+    parse(lines: string[]): ParsingResult;
 }
+
+export interface ILogsClient {
+    push(content: ParsedLine[]): Promise<boolean>;
+} 
 
 export type ParsingResult = {
     parsedContent: ParsedLine[]
