@@ -7,7 +7,8 @@ RUN apt-get update \
   && apt-get install -y curl \
   && apt-get install unzip \
   && apt-get install -f --yes nodejs \
-  && apt-get install -f --yes npm
+  && apt-get install -f --yes npm \
+  && apt-get install -f --yes nginx
 
 RUN npm install -g serve
 
@@ -31,6 +32,7 @@ COPY ./app/build /opt/fhl/log-app
 COPY ./.bin/loki.yaml /opt/fhl/loki/loki.yaml
 COPY ./.bin/grafana-datasource.yaml /opt/fhl/grafana-8.0.6/conf/provisioning/datasources/datasource.yml
 COPY ./.bin/grafana-config.ini /opt/fhl/grafana-8.0.6/conf/custom.ini
+COPY ./.bin/nginx.conf /etc/nginx/nginx.conf
 COPY ./.bin/run.sh /opt/fhl/run.sh
 RUN chmod 777 /opt/fhl/run.sh
 
