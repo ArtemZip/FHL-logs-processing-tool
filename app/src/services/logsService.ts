@@ -5,7 +5,6 @@ import { getLogsClient } from "./lokiClient";
 export class LogsParserService implements ILogsParserService {
     private logsParser: ILogsParser;
     private logsClient: ILogsClient;
-    private chunksSize: number = 10;
 
     public constructor() {
         this.logsParser = initLogsParser();
@@ -17,7 +16,7 @@ export class LogsParserService implements ILogsParserService {
         // todo: think about parsing whole content or split into chunks
         const result = this.logsParser.parse(lines);
         // todo: split
-        await this.logsClient.push(result.parsedContent.slice(0, this.chunksSize));
+        await this.logsClient.push(result.parsedContent);
     }
 
     private splitFileContent(content: string): string[] {

@@ -5,7 +5,7 @@ export class TswLogsParser implements ILogsParser {
         let parsedLines: ParsedLine[] = [];
         lines.forEach(line => {
             let dateTime = line.match(/^.*Time\)/)?.[0] ?? '';
-            const parsedLine = [dateTime];
+            const parsedLine = [`${Date.parse(dateTime)}`];
             parsedLines.push({ columns: parsedLine });
         });
 
