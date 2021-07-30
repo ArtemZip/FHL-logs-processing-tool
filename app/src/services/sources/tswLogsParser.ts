@@ -3,12 +3,14 @@ import type { ILogsParser, ParsedLine, ParsingResult } from '../../types/logsPar
 export class TswLogsParser implements ILogsParser {
     public parse(lines: string[]): ParsingResult {
         let parsedLines: ParsedLine[] = [];
-        lines.slice(0, 20).forEach(line => {
-            const dateTime = line.match(/^.*Time\)/)?.[0] ?? '';
-            const logLevel = line.match(/\b(?:event|info|error|warning|debug)\b/)?.[0] ?? '';
-            const message = line.match(`(?<=${logLevel} -- ).*`)?.[0] ?? '';
-            const parsedLine = [`${Date.parse(dateTime)}`, `level=${logLevel} msg=${message}`];
-            parsedLines.push({ columns: parsedLine });
+        lines.forEach(line => {
+            const dateTime = line.match(/^.*Time\)/)?.[0];
+            if (dateTime) {
+                const logLevel = line.match(/\b(?:event|info|error|warning|debug)\b/)?.[0] ?? '';
+                const message = line.match(`(?<=${logLevel} -- ).*`)?.[0] ?? '';
+                const parsedLine = [`${Date.parse(dateTime)}`, `level=${logLevel} msg=${message}`];
+                parsedLines.push({ columns: parsedLine });
+            }
         });
 
         return {
