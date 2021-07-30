@@ -2,7 +2,7 @@ import { ILogsClient, ParsedLine } from "../types/logsParserInterfaces";
 
 export class LokiClient implements ILogsClient {
     // todo: add to config file 
-    private lokiEndpoint: string = 'http://localhost:3100/loki/api/v1/push';
+    private lokiEndpoint: string = 'http://localhost:3101/loki/api/v1/push';
     private chunksSize: number = 10;
 
     public async push(content: ParsedLine[]): Promise<boolean> {
@@ -24,18 +24,16 @@ export class LokiClient implements ILogsClient {
             method: 'POST',
             headers: {
               'Accept': 'application/json',
-              'Content-Type': 'application/json'
+              'Content-Type': 'application/json',
             },
-            // mode: 'no-cors',
             body: JSON.stringify(body)
         };
 
         try {
-           
-            const response = await fetch(this.lokiEndpoint, requestOptions);
-            const data = await response.json();
+            await fetch(this.lokiEndpoint, requestOptions);
             return true;
         } catch (error) {
+            console.log(error);
             return false;
         }
     }

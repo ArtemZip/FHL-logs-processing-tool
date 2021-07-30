@@ -1,5 +1,7 @@
 #!/bin/bash
 
+service nginx restart
+
 cd /opt/fhl/grafana-8.0.6
 ./bin/grafana-server > /dev/null & echo "Grafana Started"
 
