@@ -8,7 +8,8 @@ RUN apt-get update \
   && apt-get install unzip \
   && apt-get install -f --yes nodejs \
   && apt-get install -f --yes npm \
-  && apt-get install -f --yes nginx
+  && apt-get install -f --yes nginx \ 
+  && apt-get install -f --yes nginx-extras
 
 RUN npm install -g serve
 
