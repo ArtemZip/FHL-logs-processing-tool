@@ -30,10 +30,7 @@ export class LokiClient implements ILogsClient {
         };
 
         try {
-           
-            const response = await fetch(this.lokiEndpoint, requestOptions);
-            const data = await response.json();
-            console.log(data);
+            await fetch(this.lokiEndpoint, requestOptions);
             return true;
         } catch (error) {
             console.log(error);
