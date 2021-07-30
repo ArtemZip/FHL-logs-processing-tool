@@ -24,7 +24,7 @@ export class TmpLogsParser implements ILogsParser {
             const message = line.match(`(?<=${resource}\s*).*`)?.[0] ?? '';
 
             this.currentTimestamp = Date.parse(dateTime);
-            const parsedLine = [`${Date.parse(dateTime)}`, `level='${logLevel.trim()}' resource='${resource.trim()}' msg='${message.trim()}'`];
+            const parsedLine = [`${this.currentTimestamp}`, `level='${logLevel.trim()}' resource='${resource.trim()}' msg='${message.trim()}'`];
 
             return { columns: parsedLine };
         }
