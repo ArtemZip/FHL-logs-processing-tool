@@ -25,19 +25,9 @@ export class LokiClient implements ILogsClient {
             headers: {
               'Accept': 'application/json',
               'Content-Type': 'application/json',
-              'Origin': "http://localhost:8080/",
-              'Referrer-Policy': 'no-referrer',
-              'Referrer Policy': 'no-referrer',
             },
-            // mode: 'no-cors',
             body: JSON.stringify(body)
         };
-
-        fetch("http://localhost:3101/metrics", {method: 'GET'}).then(r => {
-            console.log(`HERE: ${r}`);
-        }).catch(e => {
-            console.log(`ERROR: ${e}`);
-        })
 
         try {
            
