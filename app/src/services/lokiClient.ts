@@ -3,19 +3,27 @@ import { ILogsClient, ParsedLine } from "../types/logsParserInterfaces";
 export class LokiClient implements ILogsClient {
     // todo: add to config file 
     private lokiEndpoint: string = 'http://localhost:3101/loki/api/v1/push';
-    private chunksSize: number = 10;
+    private chunksSize: number = 50;
 
     public async push(content: ParsedLine[]): Promise<boolean> {
-        let values: string[][] = [];
-        content.slice(0, 20).forEach(line => values.push(line.columns));
+        const label = `Logs::[${new Date().toISOString()}]`;
 
+        let result: boolean = true;
+        for(let i = 0; i < content.length; i+=this.chunksSize) {
+            result = result && await this.pushChunk(content.slice(i, i+this.chunksSize), label);
+        }
+
+        return result;
+    }
+
+    private async pushChunk (content: ParsedLine[], label: string) {
         const body = {
             streams: [
                 {
                     stream: {
-                        label: `${Date.now()}`
+                        label: label
                     },
-                    values: values
+                    values: content.map(e => e.columns)
                 }
             ]
         };

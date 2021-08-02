@@ -17,7 +17,7 @@ export class LogsParserService implements ILogsParserService {
             const result = logsParser.parse(lines);
             await this.logsClient.push(result.parsedContent);
         } catch (error) {
-            // todo: display error
+            console.log(error)
         }
     }
 
